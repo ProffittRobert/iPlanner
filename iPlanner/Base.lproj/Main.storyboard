@@ -31,7 +31,14 @@
                             <outlet property="delegate" destination="U0L-Dv-jaL" id="r5D-yU-XlX"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="iPlanner" id="cDJ-ZK-5xJ"/>
+                    <navigationItem key="navigationItem" title="iPlanner" id="cDJ-ZK-5xJ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="PNz-Lb-tvV">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="addButtonPressed:" destination="U0L-Dv-jaL" id="Jk5-RJ-22f"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yPa-vA-2tT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
