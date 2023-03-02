@@ -18,7 +18,7 @@ class TodoListViewController: UITableViewController {
         
         super.viewDidLoad()
         
-        if let items = defaults.array(forKey: "TodoListArray") as? [String] {
+        if let items = defaults.array(forKey: K.defaultArray) as? [String] {
             itemArray = items
         }
     }
@@ -31,7 +31,7 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath)
         var cellContent = cell.defaultContentConfiguration()
         cellContent.text = itemArray[indexPath.row]
         cell.contentConfiguration = cellContent
@@ -60,7 +60,7 @@ class TodoListViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             if textField.text != "" {
                 self.itemArray.append(textField.text!)
-                self.defaults.set(self.itemArray, forKey: "TodoListArray")
+                self.defaults.set(self.itemArray, forKey: K.defaultArray)
                 self.tableView.reloadData()
             }
         }
