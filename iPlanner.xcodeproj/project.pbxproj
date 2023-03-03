@@ -3,11 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0349374A29B101C2009165FD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0349374929B101C1009165FD /* Constants.swift */; };
+		0349375029B135E1009165FD /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0349374F29B135E0009165FD /* Item.swift */; };
+		0349375329B18E1A009165FD /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0349375229B18E1A009165FD /* Realm */; };
+		0349375529B18E1A009165FD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0349375429B18E1A009165FD /* RealmSwift */; };
+		0349375929B190F6009165FD /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0349375829B190F6009165FD /* Category.swift */; };
+		0349375B29B19BEC009165FD /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0349375A29B19BEC009165FD /* CategoryViewController.swift */; };
 		EB2BE4FA239524DB00FB933B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BE4F9239524DB00FB933B /* AppDelegate.swift */; };
 		EB2BE4FE239524DB00FB933B /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BE4FD239524DB00FB933B /* TodoListViewController.swift */; };
 		EB2BE501239524DB00FB933B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB2BE4FF239524DB00FB933B /* Main.storyboard */; };
@@ -17,6 +22,9 @@
 
 /* Begin PBXFileReference section */
 		0349374929B101C1009165FD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0349374F29B135E0009165FD /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		0349375829B190F6009165FD /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		0349375A29B19BEC009165FD /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		EB2BE4F6239524DB00FB933B /* iPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2BE4F9239524DB00FB933B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB2BE4FD239524DB00FB933B /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
@@ -31,6 +39,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0349375529B18E1A009165FD /* RealmSwift in Frameworks */,
+				0349375329B18E1A009165FD /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,8 +59,29 @@
 			isa = PBXGroup;
 			children = (
 				EB2BE4FD239524DB00FB933B /* TodoListViewController.swift */,
+				0349375A29B19BEC009165FD /* CategoryViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		0349374D29B1353C009165FD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0349374F29B135E0009165FD /* Item.swift */,
+				0349375829B190F6009165FD /* Category.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0349374E29B1358D009165FD /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				EB2BE504239524DC00FB933B /* LaunchScreen.storyboard */,
+				EB2BE502239524DC00FB933B /* Assets.xcassets */,
+				EB2BE4F9239524DB00FB933B /* AppDelegate.swift */,
+				0349374929B101C1009165FD /* Constants.swift */,
+			);
+			path = "Support Files";
 			sourceTree = "<group>";
 		};
 		EB2BE4ED239524DB00FB933B = {
@@ -72,12 +103,10 @@
 		EB2BE4F8239524DB00FB933B /* iPlanner */ = {
 			isa = PBXGroup;
 			children = (
-				EB2BE4F9239524DB00FB933B /* AppDelegate.swift */,
-				0349374929B101C1009165FD /* Constants.swift */,
+				0349374E29B1358D009165FD /* Support Files */,
+				0349374D29B1353C009165FD /* Model */,
 				0349374B29B102AD009165FD /* View */,
 				0349374C29B102D0009165FD /* Controller */,
-				EB2BE502239524DC00FB933B /* Assets.xcassets */,
-				EB2BE504239524DC00FB933B /* LaunchScreen.storyboard */,
 				EB2BE507239524DC00FB933B /* Info.plist */,
 			);
 			path = iPlanner;
@@ -99,6 +128,10 @@
 			dependencies = (
 			);
 			name = iPlanner;
+			packageProductDependencies = (
+				0349375229B18E1A009165FD /* Realm */,
+				0349375429B18E1A009165FD /* RealmSwift */,
+			);
 			productName = Todoey;
 			productReference = EB2BE4F6239524DB00FB933B /* iPlanner.app */;
 			productType = "com.apple.product-type.application";
@@ -127,6 +160,9 @@
 				Base,
 			);
 			mainGroup = EB2BE4ED239524DB00FB933B;
+			packageReferences = (
+				0349375129B18E1A009165FD /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = EB2BE4F7239524DB00FB933B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -154,8 +190,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0349375029B135E1009165FD /* Item.swift in Sources */,
+				0349375929B190F6009165FD /* Category.swift in Sources */,
 				EB2BE4FE239524DB00FB933B /* TodoListViewController.swift in Sources */,
 				EB2BE4FA239524DB00FB933B /* AppDelegate.swift in Sources */,
+				0349375B29B19BEC009165FD /* CategoryViewController.swift in Sources */,
 				0349374A29B101C2009165FD /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,7 +347,7 @@
 				INFOPLIST_FILE = iPlanner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = iPlanner;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -331,7 +370,7 @@
 				INFOPLIST_FILE = iPlanner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = iPlanner;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -366,6 +405,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0349375129B18E1A009165FD /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0349375229B18E1A009165FD /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0349375129B18E1A009165FD /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		0349375429B18E1A009165FD /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0349375129B18E1A009165FD /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EB2BE4EE239524DB00FB933B /* Project object */;
 }
