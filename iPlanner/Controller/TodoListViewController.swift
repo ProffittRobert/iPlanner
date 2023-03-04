@@ -1,12 +1,12 @@
 import UIKit
 import RealmSwift
+import DynamicColor
 
-class TodoListViewController: UITableViewController
+class TodoListViewController: SwipeTableViewController
 {
+    @IBOutlet weak var searchBar: UISearchBar!
     var todoItems: Results<Item>?
-    
     let realm = try! Realm()
-    
     var selectedCategory : Category?
     {
         didSet
@@ -19,6 +19,8 @@ class TodoListViewController: UITableViewController
     {
         super.viewDidLoad()
         
+        tableView.rowHeight = 80.0
+        tableView.backgroundColor = .systemCyan
     }
     
     //MARK: - TableViewDataSource Methods
@@ -29,7 +31,7 @@ class TodoListViewController: UITableViewController
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         var cellContent = cell.defaultContentConfiguration()
         
@@ -37,6 +39,10 @@ class TodoListViewController: UITableViewController
         {
             cellContent.text = item.title
             cell.accessoryType = item.isDone ? .checkmark : .none
+            let darkenAmount = CGFloat(indexPath.row)/CGFloat(todoItems!.count)/2.0
+            cell.tintColor = darkenAmount > 0.2 ? .white : .black
+            cellContent.textProperties.color = darkenAmount > 0.2 ? .white : .black
+            cell.backgroundColor = UIColor(hexString: selectedCategory!.color).darkened(amount: darkenAmount)
         }
         else
         {
@@ -50,18 +56,26 @@ class TodoListViewController: UITableViewController
     //MARK: - TableViewDelegate Methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-//        let item = todoItems[indexPath.row]
-//
-//        item.isDone = !item.isDone
-//
-//        self.saveItems()
-       
+        if let item = todoItems?[indexPath.row]
+        {
+            do
+            {
+                try realm.write
+                {
+                    item.isDone = !item.isDone
+                }
+            }
+            catch
+            {
+                print("Error saving done status, \(error)")
+            }
+        }
+        tableView.reloadData()
+
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     //MARK: - Add new item
-    
-    
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem)
     {
         var textField = UITextField()
@@ -80,6 +94,7 @@ class TodoListViewController: UITableViewController
                         {
                             let newItem = Item()
                             newItem.title = textField.text!
+                            newItem.dateCreated = Date()
                             currentCategory.items.append(newItem)
                         }
                     }
@@ -107,6 +122,48 @@ class TodoListViewController: UITableViewController
         todoItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
         
         tableView.reloadData()
+    }
+    
+    //MARK: - Delete Date from Swipe
+    override func updateModel(at indexPath: IndexPath)
+    {
+        if let itemForDeletion = self.todoItems?[indexPath.row]
+            {
+              do
+              {
+                  try self.realm.write
+                  {
+                      self.realm.delete(itemForDeletion)
+                  }
+              }
+              catch
+              {
+                  print("Error deleting item, \(error)")
+              }
+            }
+    }
+}
+
+//MARK: - Search Bar Methods
+extension TodoListViewController: UISearchBarDelegate
+{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
+    {
+        todoItems = todoItems?.filter("title CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: K.keyPath, ascending: true)
+        
+        tableView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
+    {
+        if searchBar.text?.count == 0
+        {
+            loadItems()
+            DispatchQueue.main.async
+            {
+                searchBar.resignFirstResponder()
+            }
+        }
     }
 }
 

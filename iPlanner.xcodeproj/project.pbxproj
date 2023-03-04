@@ -13,6 +13,9 @@
 		0349375529B18E1A009165FD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0349375429B18E1A009165FD /* RealmSwift */; };
 		0349375929B190F6009165FD /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0349375829B190F6009165FD /* Category.swift */; };
 		0349375B29B19BEC009165FD /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0349375A29B19BEC009165FD /* CategoryViewController.swift */; };
+		0349375E29B266D2009165FD /* SwipeCellKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0349375D29B266D2009165FD /* SwipeCellKit */; };
+		0349376029B28D43009165FD /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0349375F29B28D43009165FD /* SwipeTableViewController.swift */; };
+		0349376529B3073D009165FD /* DynamicColor in Frameworks */ = {isa = PBXBuildFile; productRef = 0349376429B3073D009165FD /* DynamicColor */; };
 		EB2BE4FA239524DB00FB933B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BE4F9239524DB00FB933B /* AppDelegate.swift */; };
 		EB2BE4FE239524DB00FB933B /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BE4FD239524DB00FB933B /* TodoListViewController.swift */; };
 		EB2BE501239524DB00FB933B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB2BE4FF239524DB00FB933B /* Main.storyboard */; };
@@ -25,6 +28,7 @@
 		0349374F29B135E0009165FD /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		0349375829B190F6009165FD /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		0349375A29B19BEC009165FD /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		0349375F29B28D43009165FD /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
 		EB2BE4F6239524DB00FB933B /* iPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2BE4F9239524DB00FB933B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB2BE4FD239524DB00FB933B /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
@@ -39,7 +43,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0349376529B3073D009165FD /* DynamicColor in Frameworks */,
 				0349375529B18E1A009165FD /* RealmSwift in Frameworks */,
+				0349375E29B266D2009165FD /* SwipeCellKit in Frameworks */,
 				0349375329B18E1A009165FD /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -59,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				EB2BE4FD239524DB00FB933B /* TodoListViewController.swift */,
+				0349375F29B28D43009165FD /* SwipeTableViewController.swift */,
 				0349375A29B19BEC009165FD /* CategoryViewController.swift */,
 			);
 			path = Controller;
@@ -131,6 +138,8 @@
 			packageProductDependencies = (
 				0349375229B18E1A009165FD /* Realm */,
 				0349375429B18E1A009165FD /* RealmSwift */,
+				0349375D29B266D2009165FD /* SwipeCellKit */,
+				0349376429B3073D009165FD /* DynamicColor */,
 			);
 			productName = Todoey;
 			productReference = EB2BE4F6239524DB00FB933B /* iPlanner.app */;
@@ -162,6 +171,8 @@
 			mainGroup = EB2BE4ED239524DB00FB933B;
 			packageReferences = (
 				0349375129B18E1A009165FD /* XCRemoteSwiftPackageReference "realm-swift" */,
+				0349375C29B266D2009165FD /* XCRemoteSwiftPackageReference "SwipeCellKit" */,
+				0349376329B3073D009165FD /* XCRemoteSwiftPackageReference "DynamicColor" */,
 			);
 			productRefGroup = EB2BE4F7239524DB00FB933B /* Products */;
 			projectDirPath = "";
@@ -193,6 +204,7 @@
 				0349375029B135E1009165FD /* Item.swift in Sources */,
 				0349375929B190F6009165FD /* Category.swift in Sources */,
 				EB2BE4FE239524DB00FB933B /* TodoListViewController.swift in Sources */,
+				0349376029B28D43009165FD /* SwipeTableViewController.swift in Sources */,
 				EB2BE4FA239524DB00FB933B /* AppDelegate.swift in Sources */,
 				0349375B29B19BEC009165FD /* CategoryViewController.swift in Sources */,
 				0349374A29B101C2009165FD /* Constants.swift in Sources */,
@@ -415,6 +427,22 @@
 				kind = branch;
 			};
 		};
+		0349375C29B266D2009165FD /* XCRemoteSwiftPackageReference "SwipeCellKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwipeCellKit/SwipeCellKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		0349376329B3073D009165FD /* XCRemoteSwiftPackageReference "DynamicColor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yannickl/DynamicColor";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -427,6 +455,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0349375129B18E1A009165FD /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		0349375D29B266D2009165FD /* SwipeCellKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0349375C29B266D2009165FD /* XCRemoteSwiftPackageReference "SwipeCellKit" */;
+			productName = SwipeCellKit;
+		};
+		0349376429B3073D009165FD /* DynamicColor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0349376329B3073D009165FD /* XCRemoteSwiftPackageReference "DynamicColor" */;
+			productName = DynamicColor;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -1,5 +1,6 @@
 struct K
 {
-    static let cellIdentifier = "ToDoItemCell"
-    static let fileName = "Items.plist"
+    static let cellIdentifier = "Cell"
+    static let segueIdentifier = "goToItems"
+    static let keyPath = "dateCreated"
 }

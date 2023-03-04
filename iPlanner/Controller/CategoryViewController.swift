@@ -1,18 +1,10 @@
-//
-//  CategoryViewController.swift
-//  iPlanner
-//
-//  Created by Robert Proffitt on 3/2/23.
-//  Copyright © 2023 App Brewery. All rights reserved.
-//
-
 import UIKit
 import RealmSwift
+import DynamicColor
 
-class CategoryViewController: UITableViewController
+class CategoryViewController: SwipeTableViewController
 {
     let realm = try! Realm()
-    
     var categories: Results<Category>?
     
     override func viewDidLoad()
@@ -20,10 +12,12 @@ class CategoryViewController: UITableViewController
         super.viewDidLoad()
         
         loadCategories()
+        
+        tableView.rowHeight = 80.0
+        tableView.backgroundColor = .systemCyan
     }
     
     //MARK: - TableView DataSource Methods
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return categories?.count ?? 1
@@ -31,25 +25,20 @@ class CategoryViewController: UITableViewController
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-        
-        var cellContent = cell.defaultContentConfiguration()
-        
-        if let category = categories?[indexPath.row]
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+
+        if let currentCategory = categories?[indexPath.row]
         {
-            cellContent.text = category.name
-        }
-        else
-        {
-            cellContent.text = "No Categories Added Yet"
+            var cellContent = cell.defaultContentConfiguration()
+            cellContent.text = currentCategory.name
+            cell.contentConfiguration = cellContent
+            cell.backgroundColor = DynamicColor(hexString: currentCategory.color)
         }
         
-        cell.contentConfiguration = cellContent
         return cell
     }
     
     //MARK: - data manipulation methods
-    
     func save(_ category: Category)
     {
         do
@@ -74,8 +63,26 @@ class CategoryViewController: UITableViewController
         tableView.reloadData()
     }
     
-    //MARK: - Add new categories
+    //MARK: - Delete Date from Swipe
+    override func updateModel(at indexPath: IndexPath)
+    {
+        if let categoryForDeletion = self.categories?[indexPath.row]
+            {
+              do
+              {
+                  try self.realm.write
+                  {
+                      self.realm.delete(categoryForDeletion)
+                  }
+              }
+              catch
+              {
+                  print("Error deleting category, \(error)")
+              }
+            }
+    }
     
+    //MARK: - Add new categories
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem)
     {
         var textField = UITextField()
@@ -88,7 +95,8 @@ class CategoryViewController: UITableViewController
             {
                 let newCategory = Category()
                 newCategory.name = textField.text!
-                
+                let colorString = DynamicColor.random.toHexString()
+                newCategory.color = colorString
                 self.save(newCategory)
             }
         }
@@ -105,10 +113,9 @@ class CategoryViewController: UITableViewController
     }
     
     //MARK: - TableView Delegate Methods
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        performSegue(withIdentifier: "goToItems", sender: self)
+        performSegue(withIdentifier: K.segueIdentifier, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -121,3 +128,17 @@ class CategoryViewController: UITableViewController
         }
     }
 }
+
+extension UIColor
+{
+    static var random: UIColor
+    {
+        return UIColor(
+            red: .random(in: 0.3...1),
+            green: .random(in: 0.3...1),
+            blue: .random(in: 0.3...1),
+            alpha: 1.0
+        )
+    }
+}
+
